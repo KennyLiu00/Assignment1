@@ -82,15 +82,21 @@ public:
      * @param state
      */
     void setState(ProcState state) {
-        // TODO: add your code here
+        state = newState //set parameter to newState
     }
 
     /**
      * @brief Change the priority of the PCB.
-     * @param priority
+     * @param newPriority
      */
-    void setPriority(unsigned int priority) {
-        // TODO: add your code here
+    void setPriority(unsigned int newPriority) {
+	//Checking priority is within the valid range (1-50)
+        if (newPriority >= 1 && newPriority <= 50) {
+		priority = newPriority;
+    	} else {
+		//Print an error message if the new priority is out of range
+		cout << "Error: Priority must be in the range of 1-50." << endl;
+     	}
     }
 
     /**
