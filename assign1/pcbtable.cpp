@@ -1,7 +1,7 @@
 /**
  * Assignment 1: priority queue of processes
  * @file pcbtable.h
- * @author ??? (TODO: your name)
+ * @author Kenny Liu
  * @brief This is the implementation file for the PCBTable class.
  * //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
  * // Remember to add sufficient comments to your code
@@ -15,7 +15,16 @@
  * @param size: the capacity of the PCBTable
  */
 PCBTable::PCBTable(int size) {
-   // TODO: add your code here
+   //Initialize the size of the PCBTable
+   capacity = size;
+
+   //Initialize the PCB array with the given capacity
+   pcbArray = new PCB*[capacity];
+
+   //Initialize all PCB pointers to nullptr
+   for (int i = 0; i < capacity; i++) {
+      pcbArray[i] = nullptr;
+   }
 }
 
 /**
@@ -23,8 +32,13 @@ PCBTable::PCBTable(int size) {
  *
  */
 PCBTable::~PCBTable() {
-   // TODO: add your code here
-   // Delete all the PCBs in the table
+   // Delete all the PCBs in the table and release memory
+   for (int i = 0; i < capacity; i++) {
+      delete pcbArray[i];
+   }
+
+   //Release memory for the PCB array
+   delete[] pcbArray;
 }
 
 /**
@@ -34,8 +48,13 @@ PCBTable::~PCBTable() {
  * @return PCB*: pointer to the PCB at index "idx"
  */
 PCB* PCBTable::getPCB(unsigned int idx) {
-    // TODO: add your code here
+    //Check if idx is within the valid range
+   if (idx < capacity) {
+      return pcbArray[idx];
+   } else {
+      // Handle out-of-range error
     return NULL;
+   }
 }
 
 /**
@@ -44,6 +63,14 @@ PCB* PCBTable::getPCB(unsigned int idx) {
  * @param pcb: the PCB to add
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) {
-    // TODO: add your code here
-    // Add a PCB pointer to the PCBTable at index idx.
+    // Check if idx is within the valid range
+   if (idx < capacity) {
+      // Delete the existing PCB at idx if it exists
+      delete pcbArray[idx];
+
+      // Assign the new PCB pointer to the specified index
+      pcbArray[idx] = pcb;
+   } else {
+      // Handle out-of-range error (do nothing)
+   }
 }
