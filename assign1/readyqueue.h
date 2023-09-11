@@ -9,19 +9,20 @@
 //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
 // Remember to add sufficient comments to your code
 #pragma once
-using namespace std;
 #include "pcb.h"
-#include <vector>
+
 
 /**
  * @brief A queue of PCB's that are in the READY state to be scheduled to run.
  * It should be a priority queue such that the process with the highest priority can be selected next.
  */
-class ReadyQueue {
+
+int const MAX = 200; //size for ReadyQueue
+
+class ReadyQueue : public PCB {
 private:
-    vector<PCB> data; //vector to store PCBs
-    void bubbleDown(int);//bubbles down the tree to the correct position
-    void bubbleUp(int);//bubbles up the tree to the correct position 
+  PCB* Q[MAX]; //array of pointers for PCBs
+  int count;
 
 public:
     /**
@@ -62,5 +63,10 @@ public:
       * @brief Display the PCBs in the queue.
       */
 	void displayAll();
+	void insert(PCB& value);  //insert a value into the heap
+  	void deleteSmallValue();  //delete the min value of heap
+  	int getBiggerChild(int index);  //going down the array using recursion
+  	void swapFunc(int x, int y);
+  	void trickleup();
 
 };
