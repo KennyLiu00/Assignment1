@@ -15,16 +15,8 @@
  * @param size: the capacity of the PCBTable
  */
 PCBTable::PCBTable(int size) {
-   //Initialize the size of the PCBTable
-   capacity = size;
-
-   //Initialize the PCB array with the given capacity
-   pcbArray = new PCB*[capacity];
-
-   //Initialize all PCB pointers to nullptr
-   for (int i = 0; i < capacity; i++) {
-      pcbArray[i] = nullptr;
-   }
+   //setting capacities for the following elements
+   processes.resize(size);//sizes available inside the table 
 }
 
 /**
@@ -32,9 +24,12 @@ PCBTable::PCBTable(int size) {
  *
  */
 PCBTable::~PCBTable() {
-   // Delete all the PCBs in the table and release memory
-   for (int i = 0; i < capacity; i++) {
-      delete pcbArray[i];
+   for (int i = 0; i < size; i++) { // deletes PCBs pointed and points to NULL
+    delete processes[i]; //delete the following elements inside the array
+    processes[i] = NULL; //set to NULL once the array has been deleted
+  }
+  processes.clear(); //clear the array
+  size = 0; //set to 0 since nothing is left
    }
 
    //Release memory for the PCB array
@@ -48,14 +43,9 @@ PCBTable::~PCBTable() {
  * @return PCB*: pointer to the PCB at index "idx"
  */
 PCB* PCBTable::getPCB(unsigned int idx) {
-    //Check if idx is within the valid range
-   if (idx < capacity) {
-      return pcbArray[idx];
-   } else {
-      // Handle out-of-range error
-    return NULL;
+    return processes[idx]; //get the following element in given index
    }
-}
+
 
 /**
  * @brief Add a PCB pointer to the PCBTable at index idx.
@@ -63,14 +53,6 @@ PCB* PCBTable::getPCB(unsigned int idx) {
  * @param pcb: the PCB to add
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) {
-    // Check if idx is within the valid range
-   if (idx < capacity) {
-      // Delete the existing PCB at idx if it exists
-      delete pcbArray[idx];
-
-      // Assign the new PCB pointer to the specified index
-      pcbArray[idx] = pcb;
-   } else {
-      // Handle out-of-range error (do nothing)
-   }
+   processes.insert(processes.begin()+idx, pcb);  // iterator starts at front and ends at index PCB is to be placed at
+   size++; // increment since we are adding a PCB
 }
