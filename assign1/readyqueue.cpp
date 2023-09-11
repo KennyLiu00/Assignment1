@@ -1,11 +1,10 @@
 #include <iostream>
 #include "readyqueue.h"
+#include "pcb.h"
+#include <cmath>
+#include <iomanip>
 
 using namespace std;
-
-//You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
-// Remember to add sufficient comments to your code
-
 
 /**
  * @brief Constructor for the ReadyQueue class.
@@ -19,6 +18,7 @@ using namespace std;
 */
 ReadyQueue::~ReadyQueue() {
     //TODO: add your code to release dynamically allocate memory
+ 
 }
 
 /**
@@ -47,12 +47,18 @@ PCB* ReadyQueue::removePCB() {
  * @return int: the number of PCBs in the queue
  */
 int ReadyQueue::size() {
-    //TODO: add your code here
+     return data.size();
 }
 
 /**
  * @brief Display the PCBs in the queue.
  */
 void ReadyQueue::displayAll() {
-    //TODO: add your code here
+    ProcState currentState;
+    cout << "Queue: \n";
+    cout << "ID" << "\t\t" << "Priority" "\t\t" << "State" << endl;
+    cout << "---------------------------------------" << endl;
+    for(int i = 0; i < data.size(); i++){
+        currentState = data[i].getState();
+        cout << data[i].getID() << "\t\t" << data[i].getPriority() << "\t\t\t\t" << data[i].formatState(currentState) << endl;
 }
