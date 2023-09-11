@@ -8,19 +8,18 @@
 //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
 // Remember to add sufficient and clear comments to your code
 #pragma once
-
+#include <vector>
 #include "pcb.h"
+using namespace std;
 
 /**
  * @brief PCTable is an array of all PCB's in the system
  * 
  */
-class PCBTable {
+class PCBTable : public PCB{
 private:
-    // TODO: add your private member variables here
-    // choose a data structure for the PCBTable. 
-    // You can use an array of PCB pointers, e.g. vector<PCB *>. 
-
+    int size; //size of the table
+    vector<PCB*> processes; //vectors that have all of the processes
 public:
     /**
      * @brief Construct a new PCBTable object of the given size (number of PCBs)
