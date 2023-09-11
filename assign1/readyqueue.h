@@ -9,8 +9,9 @@
 //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
 // Remember to add sufficient comments to your code
 #pragma once
-
+using namespace std;
 #include "pcb.h"
+#include <vector>
 
 /**
  * @brief A queue of PCB's that are in the READY state to be scheduled to run.
@@ -18,8 +19,9 @@
  */
 class ReadyQueue {
 private:
-    // TODO: add your private member variables here
-    // choose a data structure for the ReadyQueue. No STL class is allowed.
+    vector<PCB> data; //vector to store PCBs
+    void bubbleDown(int);//bubbles down the tree to the correct position
+    void bubbleUp(int);//bubbles up the tree to the correct position 
 
 public:
     /**
