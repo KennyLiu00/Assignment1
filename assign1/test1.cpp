@@ -14,7 +14,7 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(/*int argc, char* argv[]*/) {
     cout << "CS 433 Programming assignment 1" << endl;
     cout << "Course: CS433 (Operating Systems)" << endl;
     cout << "Description : Program to implement a priority ready queue of processes" << endl;
