@@ -1,3 +1,5 @@
+#ifndef HEADER_FILE_H
+#define HEADER_FILE_H
 #include <iostream>
 #include "readyqueue.h"
 #include "pcb.h"
@@ -167,3 +169,5 @@ void ReadyQueue::trickleup()
       return;
   }  
 }
+
+#endif
