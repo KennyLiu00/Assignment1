@@ -21,8 +21,8 @@ int main(/*int argc, char* argv[]*/) {
     cout << "************Performing Test 1********************" << endl;
     cout << "=================================" << endl;
 
-    std::ReadyQueue q1;
-    std::PCBTable table;
+    MyNamespace::ReadyQueue q1;
+    MyNamespace::PCBTable table;
 
     for (int i = 1; i <= 50; i++) {
         // Add a new PCB with id = i, priority = i to the table at index i
