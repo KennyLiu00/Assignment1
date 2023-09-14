@@ -56,7 +56,7 @@ public:
      * @return unsigned int: the ID of the PCB
      */
     unsigned int getID() {
-        return id;
+        return id; //returns the id
     }
 
     /**
@@ -65,7 +65,7 @@ public:
      * @return unsigned int: the priority of the PCB
      */
     unsigned int getPriority() {
-        return priority;
+        return priority; //returns the priority
     }
 
     /**
@@ -74,7 +74,7 @@ public:
      * @return ProcState: the state of the PCB
      */
     ProcState getState() {
-        return state;
+        return state; //returns the state
     }
 
     /**
@@ -82,7 +82,7 @@ public:
      * @param state
      */
     void setState(ProcState state) {
-        this->state = newState //set parameter to newState
+        this->state = newState 
     }
 
     /**
@@ -90,14 +90,7 @@ public:
      * @param newPriority
      */
     void setPriority(unsigned int newPriority) {
-	// //Checking priority is within the valid range (1-50)
- //        if (newPriority >= 1 && newPriority <= 50) {
-	// 	priority = newPriority;
- //    	} else {
-	// 	//Print an error message if the new priority is out of range
-	// 	cout << "Error: Priority must be in the range of 1-50." << endl;
- //     	}
-	this->priority = priority;
+	this->priority = priority; //change the priority
     }
 
     /**
