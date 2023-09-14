@@ -16,7 +16,12 @@
  */
 PCBTable::PCBTable(int size) {
    //setting capacities for the following elements
-   processes.resize(size);//sizes available inside the table 
+   // processes.resize(size);//sizes available inside the table 
+   pcbArray = new PCB*[size];
+   capacity = size;
+   for (int i = 0; i < size; i++) {
+      pcbArray[i] = nullptr;
+   }
 }
 
 /**
@@ -24,13 +29,11 @@ PCBTable::PCBTable(int size) {
  *
  */
 PCBTable::~PCBTable() {
-   for (int i = 0; i < size; i++) { // deletes PCBs pointed and points to NULL
-    delete processes[i]; //delete the following elements inside the array
-    processes[i] = NULL; //set to NULL once the array has been deleted
+   for (int i = 0; i < capacity; i++) { // deletes PCBs pointed and points to NULL
+      if (pcbArray[i] != nullptr) {
+         delete pcbArray[i];
+      }
   }
-  processes.clear(); //clear the array
-  size = 0; //set to 0 since nothing is left
-   }
 
    //Release memory for the PCB array
    delete[] pcbArray;
@@ -43,9 +46,11 @@ PCBTable::~PCBTable() {
  * @return PCB*: pointer to the PCB at index "idx"
  */
 PCB* PCBTable::getPCB(unsigned int idx) {
-    return processes[idx]; //get the following element in given index
+    if (idx < capacity) {
+       return pcbArray[idx];
    }
-
+   return nullptr;
+}
 
 /**
  * @brief Add a PCB pointer to the PCBTable at index idx.
@@ -53,6 +58,7 @@ PCB* PCBTable::getPCB(unsigned int idx) {
  * @param pcb: the PCB to add
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) {
-   processes.insert(processes.begin()+idx, pcb);  // iterator starts at front and ends at index PCB is to be placed at
-   size++; // increment since we are adding a PCB
+   if (idx < capacity) {
+      pcbArray[idx] = pcb;
+   }
 }
