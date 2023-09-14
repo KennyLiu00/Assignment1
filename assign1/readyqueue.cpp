@@ -1,5 +1,5 @@
 #ifndef READYQUEUE_H
-#define HEADER_FILE_H
+#define READYQUEUE_H
 #include <iostream>
 #include "readyqueue.h"
 #include "pcb.h"
