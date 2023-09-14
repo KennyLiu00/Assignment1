@@ -82,14 +82,14 @@ public:
      * @param state
      */
     void setState(ProcState state) {
-        this->state = newState 
+        this->state = state; 
     }
 
     /**
      * @brief Change the priority of the PCB.
-     * @param newPriority
+     * @param priority
      */
-    void setPriority(unsigned int newPriority) {
+    void setPriority(unsigned int priority) {
 	this->priority = priority; //change the priority
     }
 
