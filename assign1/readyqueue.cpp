@@ -1,4 +1,4 @@
-#ifndef HEADER_FILE_H
+#ifndef READYQUEUE_H
 #define HEADER_FILE_H
 #include <iostream>
 #include "readyqueue.h"
@@ -10,7 +10,7 @@ using namespace std;
 /**
  * @brief Constructor for the ReadyQueue class.
  */
- ReadyQueue::ReadyQueue() : Q{} { //Q starts with an empty array
+ ReadyQueue::ReadyQueue() : /*Q{}*/ { //Q starts with an empty array
      count = 0; //initializing the number of elements that will be in the heap
  }
 
