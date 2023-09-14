@@ -16,10 +16,10 @@ using namespace std;
  * @brief PCTable is an array of all PCB's in the system
  * 
  */
-class PCBTable : public PCB{
+class PCBTable {
 private:
-    int size; //size of the table
-    vector<PCB*> processes; //vectors that have all of the processes
+    PCB* pcb_array; //pcb pointers array
+    int MAX; //pcb table capacity
 public:
     /**
      * @brief Construct a new PCBTable object of the given size (number of PCBs)
