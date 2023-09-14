@@ -15,7 +15,7 @@
  * @param size: the capacity of the PCBTable
  */
 PCBTable::PCBTable(int size) {
-   this->MAX = size;
+   this->capacity = size;
 }
 
 /**
@@ -23,7 +23,7 @@ PCBTable::PCBTable(int size) {
  *
  */
 PCBTable::~PCBTable() {
-   for (int i = 0; i < MAX; i++) { // deletes PCBs pointed and points to NULL
+   for (int i = 0; i < capacity; i++) { // deletes PCBs pointed and points to NULL
          delete pcbArray[i];
   }
    //Release memory for the PCB array
@@ -38,7 +38,7 @@ PCBTable::~PCBTable() {
  */
 PCB* PCBTable::getPCB(unsigned int idx) {
    int i = idx;
-    if (i < MAX) {
+    if (i < capacity) {
        return pcb_array[idx];
    }
    return NULL;
@@ -51,7 +51,7 @@ PCB* PCBTable::getPCB(unsigned int idx) {
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) {
    //Add ponter to the table at idx
-   if (idx < MAX && pb_array[idx] == nullptr) {
+   if (idx < capacity && pb_array[idx] == nullptr) {
       pcbArray[idx] = pcb;
    } else {
       cout << "Invalid input.\n";
