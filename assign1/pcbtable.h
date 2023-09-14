@@ -19,7 +19,7 @@ using namespace std;
 class PCBTable {
 private:
     PCB* pcb_array; //pcb pointers array
-    int MAX; //pcb table capacity
+    int capacity; //pcb table capacity
 public:
     /**
      * @brief Construct a new PCBTable object of the given size (number of PCBs)
