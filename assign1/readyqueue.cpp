@@ -10,7 +10,7 @@ using namespace std;
 /**
  * @brief Constructor for the ReadyQueue class.
  */
- ReadyQueue::ReadyQueue(int initialCapacity) : rsize(0), capacity(initialCapacity) {
+ ReadyQueue::ReadyQueue(int initialCapacity) : arraySize(0), capacity(initialCapacity) {
     arrqueue = new PCB*[capacity];
 }
 
@@ -27,13 +27,13 @@ ReadyQueue::~ReadyQueue() {
  * @param pcbPtr: the pointer to the PCB to be added
  */
 void ReadyQueue::addPCB(PCB *pcbPtr) {
-    if (rsize == capacity) {
+    if (arraySize == capacity) {
         // Double the capacity and reallocate memory for the array
         capacity *= 2;
         PCB** newArr = new PCB*[capacity];
         
         // Copy elements from the old array to the new array
-        for (int i = 0; i < rsize; i++) {
+        for (int i = 0; i < arraySize; i++) {
             newArr[i] = arrqueue[i];
         }
         
@@ -43,22 +43,22 @@ void ReadyQueue::addPCB(PCB *pcbPtr) {
         // Update arrqueue to point to the new array
         arrqueue = newArr;
     }
-    int insertIndex = rsize;
+    int insertIndex = arraySize;
     // Find the correct position to insert the process based on its priority
-    for (int i = 0; i < rsize; i++) {
+    for (int i = 0; i < arraySize; i++) {
         if (pcbPtr->getPriority() > arrqueue[i]->getPriority()) {
             insertIndex = i;
             break;
         }
     }
     // Shift elements to make room for the new process
-    for (int i = rsize; i > insertIndex; i--) {
+    for (int i = arraySize; i > insertIndex; i--) {
         arrqueue[i] = arrqueue[i - 1];
     }
 
     // Insert the process at the correct position
     arrqueue[insertIndex] = pcbPtr;
-    rsize++;
+    arraySize++;
 
     // Set the state of the inserted process
     pcbPtr->setState(ProcState::READY);
@@ -70,13 +70,13 @@ void ReadyQueue::addPCB(PCB *pcbPtr) {
  * @return PCB*: the pointer to the PCB with the highest priority
  */
 PCB* ReadyQueue::removePCB() {
-    if (rsize == 0) {
+    if (arraySize == 0) {
         return nullptr; // Return nullptr when the queue is empty
     }
 
     int priority = 0;
     PCB *priorityreturn;
-    for (int i = 1; i < rsize; i++) {
+    for (int i = 1; i < arraySize; i++) {
         if (arrqueue[priority]->getPriority() < arrqueue[i]->getPriority()) {
             priority = i;
         }
@@ -85,10 +85,10 @@ PCB* ReadyQueue::removePCB() {
     // Set the state of the removed process to RUNNING
     priorityreturn->setState(ProcState::RUNNING);
 
-    for (int i = priority; i < rsize - 1; i++) {
+    for (int i = priority; i < arraySize - 1; i++) {
         arrqueue[i] = arrqueue[i + 1];
     }
-    rsize--;
+    arraySize--;
 
     return priorityreturn;
 }
@@ -98,14 +98,14 @@ PCB* ReadyQueue::removePCB() {
  * @return int: the number of PCBs in the queue
  */
 int ReadyQueue::size() {
-    return rsize;
+    return arraySize;
 }
 
 /**
  * @brief Display the PCBs in the queue.
  */
 void ReadyQueue::displayAll() {
-  for(int i = 0; i < rsize; i++){
+  for(int i = 0; i < arraySize; i++){
     arrqueue[i]->display();
   }
 }
