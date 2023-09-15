@@ -8,8 +8,9 @@
 //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
 // Remember to add sufficient and clear comments to your code
 #pragma once
-#include <vector>
+
 #include "pcb.h"
+#include <vector>
 using namespace std;
 
 /**
@@ -18,8 +19,11 @@ using namespace std;
  */
 class PCBTable {
 private:
-    PCB* pcb_array; //pcb pointers array
-    int capacity; //pcb table capacity
+    // TODO: add your private member variables here
+    // choose a data structure for the PCBTable. 
+    // You can use an array of PCB pointers, e.g. vector<PCB *>. 
+    vector<PCB*> PCBVect;
+
 public:
     /**
      * @brief Construct a new PCBTable object of the given size (number of PCBs)
