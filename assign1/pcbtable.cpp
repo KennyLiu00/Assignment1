@@ -15,7 +15,7 @@
  * @param size: the capacity of the PCBTable
  */
 PCBTable::PCBTable(int size) {
-  PCBVect.resize(size);
+  VectofPtrs.resize(size);
 }
 
 /**
@@ -23,10 +23,10 @@ PCBTable::PCBTable(int size) {
  *
  */
 PCBTable::~PCBTable() {
-   for (PCB* pcb : PCBVect) {
+   for (PCB* pcb : VectofPtrs) {
         delete pcb;
     }
-  PCBVect.clear();
+  VectofPtrs.clear();
 }
 
 /**
@@ -36,10 +36,10 @@ PCBTable::~PCBTable() {
  * @return PCB*: pointer to the PCB at index "idx"
  */
 PCB* PCBTable::getPCB(unsigned int idx) {
-    if (idx >= PCBVect.size()) {
+    if (idx >= VectofPtrs.size()) {
         throw std::out_of_range("Index out of bounds");
     }
-    return PCBVect[idx];
+    return VectofPtrs[idx];
 }
 
 /**
@@ -48,5 +48,5 @@ PCB* PCBTable::getPCB(unsigned int idx) {
  * @param pcb: the PCB to add
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) {
-    PCBVect[idx] = pcb;
+    VectofPtrs[idx] = pcb;
 }
