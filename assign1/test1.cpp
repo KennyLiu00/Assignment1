@@ -10,6 +10,7 @@
 #include <iostream>
 #include "readyqueue.h"
 #include "pcbtable.h"
+#include "pcb.h"
 
 using namespace std;
 
