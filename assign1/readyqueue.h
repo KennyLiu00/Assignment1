@@ -9,27 +9,25 @@
 //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
 // Remember to add sufficient comments to your code
 #pragma once
-#include "pcb.h"
 
+#include "pcb.h"
 
 /**
  * @brief A queue of PCB's that are in the READY state to be scheduled to run.
  * It should be a priority queue such that the process with the highest priority can be selected next.
  */
-
-int const MAX = 200; //size for ReadyQueue
-
-class ReadyQueue : public PCB {
+class ReadyQueue {
 private:
-  PCB* Q[MAX]; //array of pointers for PCBs
-  int count;
+    int rsize;            // Current size of the array
+    int capacity;         // Capacity of the array
+    PCB** arrqueue; 
 
 public:
     /**
      * @brief Construct a new ReadyQueue object
      *
      */
-    ReadyQueue();
+     ReadyQueue(int initialCapacity = 100);  // Constructor with initial capacity
 
     /**
      * @brief Destructor
@@ -63,10 +61,5 @@ public:
       * @brief Display the PCBs in the queue.
       */
 	void displayAll();
-	void insert(PCB& value);  //insert a value into the heap
-  	void deleteSmallValue();  //delete the min value of heap
-  	int getBiggerChild(int index);  //going down the array using recursion
-  	void swapFunc(int x, int y);
-  	void trickleup();
 
 };
