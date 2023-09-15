@@ -1,7 +1,7 @@
 /**
  * Assignment 1: priority queue of processes
  * @file pcb.h
- * @author Kenny Liu
+ * @author ??? (TODO: your name)
  * @brief This is the header file for the PCB class, a process control block.
  * @version 0.1
  */
@@ -12,8 +12,8 @@
 #include <iostream>
 using namespace std;
 
-//enum class of process state
-//A process (PCB) in ready queue should be in READY state
+// enum class of process state
+// A process (PCB) in ready queue should be in READY state
 enum class ProcState {NEW, READY, RUNNING, WAITING, TERMINATED};
 
 /**
@@ -56,7 +56,7 @@ public:
      * @return unsigned int: the ID of the PCB
      */
     unsigned int getID() {
-        return id; //returns the id
+        return id;
     }
 
     /**
@@ -65,7 +65,7 @@ public:
      * @return unsigned int: the priority of the PCB
      */
     unsigned int getPriority() {
-        return priority; //returns the priority
+        return priority;
     }
 
     /**
@@ -74,7 +74,7 @@ public:
      * @return ProcState: the state of the PCB
      */
     ProcState getState() {
-        return state; //returns the state
+        return state;
     }
 
     /**
@@ -82,15 +82,14 @@ public:
      * @param state
      */
     void setState(ProcState state) {
-        this->state = state; 
+        this->state = state;
     }
-
     /**
      * @brief Change the priority of the PCB.
      * @param priority
      */
     void setPriority(unsigned int priority) {
-	this->priority = priority; //change the priority
+        this->priority = priority;
     }
 
     /**
