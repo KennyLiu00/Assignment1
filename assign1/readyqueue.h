@@ -18,7 +18,7 @@
  */
 class ReadyQueue {
 private:
-    int rsize;            // Current size of the array
+    int arraySize;            // Current size of the array
     int capacity;         // Capacity of the array
     PCB** arrqueue; 
 
