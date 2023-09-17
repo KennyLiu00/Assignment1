@@ -30,10 +30,20 @@ using namespace std;
  */
 int parse_command(char command[], char *args[])
 {
-    // TODO: implement this function
+    int num_args = 0;
+    char *token = strtok(command, " \n"); // Tokenize the command using space and newline as delimiters
+
+    while (token != NULL && num_args < MAX_LINE / 2 + 1)
+    {
+        args[num_args] = token; // Store the argument
+        num_args++;
+        token = strtok(NULL, " \n");
+    }
+    
+    args[num_args] = NULL; // Null-terminate the argument list
+    return num_args;
 }
 
-// TODO: Add additional functions if you need
 
 /**
  * @brief The main function of a simple UNIX Shell. You may add additional functions in this file for your implementation
@@ -58,13 +68,41 @@ int main(int argc, char *argv[])
         // Parse the input command
         int num_args = parse_command(command, args);
 
-        // TODO: Add your code for the implementation
-        /**
-         * After reading user input, the steps are:
-         * (1) fork a child process using fork()
-         * (2) the child process will invoke execvp()
-         * (3) parent will invoke wait() unless command included &
-         */
+         if (num_args > 0)
+    {
+        if (strcmp(args[num_args - 1], "&") == 0)
+        {
+            // Background process requested
+            args[num_args - 1] = NULL; // Remove the '&' from the arguments
+            // TODO: Implement background process handling here
+        }
+
+        // Fork a child process
+        pid_t pid = fork();
+
+        if (pid == 0)
+        {
+            // Child process
+            // Execute the command using execvp
+            if (execvp(args[0], args) == -1)
+            {
+                perror("execvp");
+            }
+            exit(1); // Terminate the child process
+        }
+        else if (pid > 0)
+        {
+            // Parent process
+            if (strcmp(args[num_args - 1], "&") != 0)
+            {
+                // Wait for the child process to complete (unless it's a background process)
+                wait(NULL);
+            }
+        }
+        else
+        {
+            // Fork failed
+            perror("fork");
+        }
     }
-    return 0;
 }
