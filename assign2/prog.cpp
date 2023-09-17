@@ -2,7 +2,7 @@
 /**
  * Assignment 2: Simple UNIX Shell
  * @file pcbtable.h
- * @author ??? (TODO: your name)
+ * @author Kenny Liu, Jesus Mendoza
  * @brief This is the main function of a simple UNIX Shell. You may add additional functions in this file for your implementation
  * @version 0.1
  */
@@ -30,7 +30,18 @@ using namespace std;
  */
 int parse_command(char command[], char *args[])
 {
-    // TODO: implement this function
+     int arg_count = 0;
+    char *token = strtok(command, " \n"); // Tokenize the command by space and newline
+
+    while (token != NULL)
+    {
+        args[arg_count] = token;
+        arg_count++;
+        token = strtok(NULL, " \n");
+    }
+
+    args[arg_count] = NULL; // Null-terminate the argument list
+    return arg_count;
 }
 
 // TODO: Add additional functions if you need
@@ -47,8 +58,6 @@ int main(int argc, char *argv[])
     char *args[MAX_LINE / 2 + 1]; // hold parsed out command line arguments
     int should_run = 1;           /* flag to determine when to exit program */
 
-    // TODO: Add additional variables for the implementation.
-
     while (should_run)
     {
         printf("osh>");
@@ -58,13 +67,42 @@ int main(int argc, char *argv[])
         // Parse the input command
         int num_args = parse_command(command, args);
 
-        // TODO: Add your code for the implementation
-        /**
-         * After reading user input, the steps are:
-         * (1) fork a child process using fork()
-         * (2) the child process will invoke execvp()
-         * (3) parent will invoke wait() unless command included &
-         */
+        if (num_args > 0)
+        {
+            // Check for the "exit" command
+            if (strcmp(args[0], "exit") == 0)
+            {
+                should_run = 0; // Exit the shell
+            }
+            else
+            {
+                // Fork a child process
+                pid_t pid = fork();
+
+                if (pid == 0) // Child process
+                {
+                    // Execute the command in the child process
+                    if (execvp(args[0], args) == -1)
+                    {
+                        perror("execvp"); // Print an error message if execvp fails
+                        exit(EXIT_FAILURE);
+                    }
+                }
+                else if (pid > 0) // Parent process
+                {
+                    int status;
+                    // Wait for the child process to finish unless the command includes "&"
+                    if (args[num_args - 1] != NULL && strcmp(args[num_args - 1], "&") != 0)
+                    {
+                        waitpid(pid, &status, 0);
+                    }
+                }
+                else
+                {
+                    perror("fork"); // Print an error message if fork fails
+                }
+            }
+        }
     }
     return 0;
 }
