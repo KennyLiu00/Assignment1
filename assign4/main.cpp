@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
     pthread_t tid1; // producer thread id
     pthread_t tid2; // consumer thread id
   
-    * You should pass an unique int ID to each producer thread, starting from 1 to number of threads */
+    /*You should pass an unique int ID to each producer thread, starting from 1 to number of threads */
     int i;
     for(i = 0; i < pthread; i++)
       {
